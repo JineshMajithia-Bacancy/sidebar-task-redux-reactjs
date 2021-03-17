@@ -72,12 +72,12 @@ const SidebarComp = (props) => {
   };
 
   const addValueHandler = () => {
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let address = document.getElementById("address").value;
+    let website = document.getElementById("website").value;
     if (!isEdit) {
-      let name = document.getElementById("name").value;
-      let email = document.getElementById("email").value;
-      let phone = document.getElementById("phone").value;
-      let address = document.getElementById("address").value;
-      let website = document.getElementById("website").value;
       document.getElementById("name").value = "";
       document.getElementById("email").value = "";
       document.getElementById("phone").value = "";
@@ -91,19 +91,14 @@ const SidebarComp = (props) => {
       let newList = [...props.list];
       newList[index] = {
         key: props.list[index].key,
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        phone: document.getElementById("phone").value,
-        address: document.getElementById("address").value,
-        website: document.getElementById("website").value,
+        name: name,
+        email: email,
+        phone: phone,
+        address: address,
+        website: website,
       };
       setIsSidebarOpen(false);
       setIsEdit(false);
-      let name = document.getElementById("name").value;
-      let email = document.getElementById("email").value;
-      let phone = document.getElementById("phone").value;
-      let address = document.getElementById("address").value;
-      let website = document.getElementById("website").value;
       document.getElementById("name").value = "";
       document.getElementById("email").value = "";
       document.getElementById("phone").value = "";
