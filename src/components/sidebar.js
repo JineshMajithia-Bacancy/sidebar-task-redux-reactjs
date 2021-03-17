@@ -6,6 +6,7 @@ import List from "./list";
 import { toastify } from "./toastify";
 import { confirm_alert } from "./confirmAlert";
 import { connect } from "react-redux";
+import { checkValidity } from "./checkValidity";
 
 const SidebarComp = (props) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -25,18 +26,15 @@ const SidebarComp = (props) => {
   const onChangeHandler = (type) => {
     if (type === "name") {
       let name = document.getElementById("name").value;
-      if (/^[a-zA-Z\\s]*$/.test(name) && name.length > 0) {
+      if (checkValidity(type, name)) {
         setValName(true);
       } else {
         setValName(false);
       }
     }
     if (type === "email") {
-      if (
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-          document.getElementById("email").value
-        )
-      ) {
+      let email = document.getElementById("email").value;
+      if (checkValidity(type, email)) {
         setValEmail(true);
       } else {
         setValEmail(false);
@@ -44,26 +42,23 @@ const SidebarComp = (props) => {
     }
     if (type === "phone") {
       let phone = document.getElementById("phone").value;
-      if (/^(0|[1-9][0-9]*)$/.test(phone) && phone.length === 10) {
+      if (checkValidity(type, phone)) {
         setValPhone(true);
       } else {
         setValPhone(false);
       }
     }
     if (type === "address") {
-      if (/[A-Za-z0-9'.\-\s,]/.test(document.getElementById("address").value)) {
+      let address = document.getElementById("address").value;
+      if (checkValidity(type, address)) {
         setValAddress(true);
       } else {
         setValAddress(false);
       }
     }
     if (type === "website") {
-      if (
-        type === "website" &&
-        /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/.test(
-          document.getElementById("website").value
-        )
-      ) {
+      let website = document.getElementById("website").value;
+      if (checkValidity(type, website)) {
         setValWebsite(true);
       } else {
         setValWebsite(false);
