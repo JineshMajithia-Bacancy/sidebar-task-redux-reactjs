@@ -184,9 +184,12 @@ const SidebarComp = (props) => {
         onSetOpen={toggleSidebar}
         styles={{ sidebar: { background: "white" } }}
       >
-        <Button outline color="primary" onClick={toggleSidebar}>
-          Open sidebar to add data
-        </Button>
+        <div align="right">
+          <Button outline color="primary" onClick={toggleSidebar}>
+            Open sidebar to add data
+          </Button>
+        </div>
+
         <List
           list={props.list}
           deleteValueHandler={deleteValueHandler}
