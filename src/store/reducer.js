@@ -44,7 +44,7 @@ export default function reducer(state = initialState, action) {
         list,
       };
     default:
-      console.log("In default.");
+      console.log("In default of reducer.");
   }
   return state;
 }
