@@ -6,7 +6,6 @@ export default function reducer(state = initialState, action) {
   let new_list = [];
   switch (action.type) {
     case "ADD":
-      console.log("In Add");
       new_list = [
         ...state.list,
         {
@@ -22,7 +21,6 @@ export default function reducer(state = initialState, action) {
         list,
       };
     case "EDIT":
-      console.log("In Edit");
       new_list = [...state.list];
       new_list[action.package.index] = {
         name: action.package.name,
@@ -36,7 +34,6 @@ export default function reducer(state = initialState, action) {
         list,
       };
     case "DELETE":
-      console.log("In Delete");
       new_list = [...state.list];
       new_list.splice(action.index, 1);
       list = new_list;
@@ -44,7 +41,7 @@ export default function reducer(state = initialState, action) {
         list,
       };
     default:
-      console.log("In default of reducer.");
+      console.log("Should not be here.");
   }
   return state;
 }

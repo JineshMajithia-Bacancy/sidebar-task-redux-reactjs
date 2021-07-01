@@ -39,7 +39,7 @@ export const toastify = (message, type) => {
       break;
 
     default:
-      toast.dark("Should not get here", {
+      toast.dark(message, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,

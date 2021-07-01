@@ -7,6 +7,7 @@ import { toastify } from "./toastify";
 import { confirm_alert } from "./confirmAlert";
 import { connect } from "react-redux";
 import { checkValidity } from "./checkValidity";
+import Search from "./search";
 
 const SidebarComp = (props) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -18,6 +19,9 @@ const SidebarComp = (props) => {
   const [valPhone, setValPhone] = useState(false);
   const [valAddress, setValAddress] = useState(false);
   const [valWebsite, setValWebsite] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
+  const [valSearch, setValSearch] = useState(false);
+  const [searched_name, setSearchedName] = useState("");
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -62,6 +66,14 @@ const SidebarComp = (props) => {
         setValWebsite(true);
       } else {
         setValWebsite(false);
+      }
+    }
+    if (type === "text") {
+      let search = document.getElementById("search").value;
+      if (checkValidity(type, search)) {
+        setValSearch(true);
+      } else {
+        setValSearch(false);
       }
     }
     if (valName && valEmail && valPhone && valAddress && valWebsite) {
@@ -130,6 +142,20 @@ const SidebarComp = (props) => {
     document.getElementById("website").value = props.list[index].website;
   };
 
+  const toggleSearch = () => {
+    if (props.list.length === 0) {
+      toastify("List is empty.");
+      document.getElementById("search").value = "";
+    } else {
+      setIsSearch(!isSearch);
+      setSearchedName(document.getElementById("search").value);
+      document.getElementById("search").value = "";
+    }
+  };
+
+  const cancelSearch = () => {
+    setIsSearch(!isSearch);
+  };
   return (
     <div>
       <Sidebar
@@ -184,17 +210,48 @@ const SidebarComp = (props) => {
         onSetOpen={toggleSidebar}
         styles={{ sidebar: { background: "white" } }}
       >
+        <div align="left">
+          <Input
+            size="sm"
+            type="text"
+            id="search"
+            placeholder="Enter search text here"
+            invalid={valSearch ? false : true}
+            onChange={() => onChangeHandler("text")}
+          />
+          <Button
+            size="sm"
+            outline
+            color="warning"
+            onClick={toggleSearch}
+            disabled={!valSearch}
+          >
+            Search data in list using name
+          </Button>
+          <Button size="sm" outline color="danger" onClick={cancelSearch}>
+            X
+          </Button>
+        </div>
         <div align="right">
-          <Button outline color="primary" onClick={toggleSidebar}>
+          <Button size="sm" outline color="primary" onClick={toggleSidebar}>
             Open sidebar to add data
           </Button>
         </div>
 
-        <List
-          list={props.list}
-          deleteValueHandler={deleteValueHandler}
-          editValueHandler={editValueHandler}
-        />
+        {isSearch ? (
+          <Search
+            searched_name={searched_name}
+            list={props.list}
+            deleteValueHandler={deleteValueHandler}
+            editValueHandler={editValueHandler}
+          />
+        ) : (
+          <List
+            list={props.list}
+            deleteValueHandler={deleteValueHandler}
+            editValueHandler={editValueHandler}
+          />
+        )}
       </Sidebar>
       <ToastContainer />
     </div>
@@ -255,4 +312,5 @@ const madDispatchToProps = (dispatch) => {
       }),
   };
 };
+
 export default connect(mapStateToProps, madDispatchToProps)(SidebarComp);

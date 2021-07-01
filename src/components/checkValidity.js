@@ -1,5 +1,11 @@
 export const checkValidity = (type, input) => {
   switch (type) {
+    case "text":
+      if (/^[a-zA-Z\\s]*$/.test(input) && input.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
     case "name":
       if (/^[a-zA-Z\\s]*$/.test(input) && input.length > 0) {
         return true;
