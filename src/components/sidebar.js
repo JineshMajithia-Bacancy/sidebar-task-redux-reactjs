@@ -233,7 +233,13 @@ const SidebarComp = (props) => {
           </Button>
         </div>
         <div align="right">
-          <Button size="sm" outline color="primary" onClick={toggleSidebar}>
+          <Button
+            align="right"
+            size="sm"
+            outline
+            color="primary"
+            onClick={toggleSidebar}
+          >
             Open sidebar to add data
           </Button>
         </div>

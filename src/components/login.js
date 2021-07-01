@@ -1,5 +1,5 @@
 import React from "react";
-import SocialButton from "./SocialButton";
+import SocialButton from "./socialLogin";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import {
@@ -12,7 +12,7 @@ import {
   Label,
 } from "reactstrap";
 
-const Login = () => {
+const Login = (props) => {
   const handleSocialLogin = (user) => {
     console.log(user);
   };
@@ -21,6 +21,9 @@ const Login = () => {
     console.error(err);
   };
 
+  const handleLogin = () => {
+    props.history.push("/App");
+  };
   return (
     <div
       className="container-fluid"
@@ -53,7 +56,7 @@ const Login = () => {
             </Label>
             <Input type="password" required></Input>
             <br />
-            <Button outline color="primary">
+            <Button outline color="primary" onClick={handleLogin}>
               Sign In
             </Button>
             <br />

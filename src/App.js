@@ -1,10 +1,10 @@
 import React from "react";
-import Sidebar from "./components/sidebar";
+import Route from "./components/routes";
 
 export default function App() {
   return (
     <div>
-      <Sidebar />
+      <Route />
     </div>
   );
 }
